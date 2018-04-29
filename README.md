@@ -9,6 +9,7 @@ THINGS THAT NEED FIXING:
 -Maybe somehow better split the main file so it's not so huge
 -Make the help response better looking lol
 -Auto-deployments so remote users can test their changes (IMPORTANT)
+-Create Command mapper
 -Hide the token better or something
 -More IU
 
