@@ -102,7 +102,7 @@ class Music:
             await self.bot.say('cant play ur jams')
             print(e)
         else:
-            player.volume = 0.1
+            player.volume = 0.05
             return player
 
     async def enque(self, ctx, entry):

@@ -31,7 +31,7 @@ def check_opus():
         discord.opus.load_opus('opus')
 
 
-@bot.command(pass_context=True, no_pm=True)
+@bot.command(pass_context=True, no_pm=True, brief="Say hello!", description="Just type !hello")
 async def hello(ctx):
     msg = 'Yo whaddup {0.author.mention}'.format(ctx.message)
     await bot.say(msg)
@@ -40,32 +40,32 @@ async def hello(ctx):
     #     await client.send_message(message.channel, send_help(message))
 
 
-@bot.command(no_pm=True)
+@bot.command(no_pm=True, brief="I will welcome you", description="Just type !welcome")
 async def welcome():
     await bot.say(commands.welcome.send_welcome())
 
 
-@bot.command(no_pm=True)
+@bot.command(no_pm=True, brief="See wanted features")
 async def feature():
     await bot.say(commands.feature.show_features())
 
 
-@bot.command(no_pm=True)
+@bot.command(no_pm=True, brief=";)")
 async def wink():
     await bot.say(commands.wink.wink_iu())
 
 
-@bot.command(no_pm=True)
+@bot.command(no_pm=True, brief="Try it and find out...")
 async def peekaboo():
     await bot.say(commands.peekaboo.peek_iu())
 
 
-@bot.command(pass_context=True)
+@bot.command(pass_context=True, brief="I'll search the wikis", description="ex. !wiki <search_query>")
 async def wiki(ctx, *args):
     await bot.say(commands.wiki.query_wiki(ctx, args))
 
 
-@bot.command(pass_context=True, no_pm=True)
+@bot.command(pass_context=True, no_pm=True, brief="I'm twenty five!")
 async def twentyfive(ctx):
     url = 'https://www.youtube.com/watch?v=d9IxdwEFk1c'
     bot_music = bot.get_cog('Music')
@@ -73,33 +73,51 @@ async def twentyfive(ctx):
     await commands.music.Music.enque(bot_music, ctx, VoiceEntry(ctx.message, player))
 
 
-@bot.command(no_pm=True)
-async def twentythree():
-    await bot.say('https://www.youtube.com/watch?v=42Gtm4-Ax2U')
+@bot.command(pass_context=True, no_pm=True, brief="I'm twenty three!")
+async def twentythree(ctx):
+    url = 'https://www.youtube.com/watch?v=42Gtm4-Ax2U'
+    bot_music = bot.get_cog('Music')
+    player = await commands.music.Music.play_music(bot_music, ctx, url)
+    await commands.music.Music.enque(bot_music, ctx, VoiceEntry(ctx.message, player))
 
 
-@bot.command(no_pm=True)
+@bot.command(pass_context=True, no_pm=True, name="420", brief="420 blaze it")
+async def fourtwenty(ctx):
+    url = 'https://www.youtube.com/watch?v=aVRzocGJzw8'
+    bot_music = bot.get_cog('Music')
+    player = await commands.music.Music.play_music(bot_music, ctx, url)
+    await commands.music.Music.enque(bot_music, ctx, VoiceEntry(ctx.message, player))
+
+
+@bot.command(pass_context=True, no_pm=True, brief="Play youtube music.", description="ex !play <youtube link>")
+async def play(ctx, arg):
+    bot_music = bot.get_cog('Music')
+    player = await commands.music.Music.play_music(bot_music, ctx, arg)
+    await commands.music.Music.enque(bot_music, ctx, VoiceEntry(ctx.message, player))
+
+
+@bot.command(no_pm=True, brief="Watch me game")
 async def gaming():
     await bot.say('https://media1.tenor.com/images/c8827d28f2821f0c78406565f334a6d0/tenor.gif?itemid=9266360')
 
 
-@bot.command(no_pm=True)
+@bot.command(no_pm=True, brief="K")
 async def k():
     await bot.say('http://i.imgur.com/yyyg94n.gif')
 
 
-@bot.command(no_pm=True)
+@bot.command(no_pm=True, brief="We plump now")
 async def plumpbois():
     await bot.say('P L U M P B O I S  https://media.giphy.com/media/O5GKT0UDGyQLu/giphy.gif')
 
 
-@bot.command(pass_context=True, no_pm=True)
+@bot.command(pass_context=True, no_pm=True, brief="Have me say stuff.", description="ex. !say <whatever you want>")
 async def say(ctx, *args):
     msg = ' '.join(args).format(ctx.message)
     await bot.say(msg)
 
 
-@bot.command(pass_context=True, no_pm=True)
+@bot.command(pass_context=True, no_pm=True, brief="I'm gonna yut!!!")
 async def yut(ctx):
     msg = '{0.author.mention} yutted!'.format(ctx.message)
     await bot.say(msg)
