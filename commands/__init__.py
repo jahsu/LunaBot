@@ -3,3 +3,4 @@ from commands import peekaboo
 from commands import welcome
 from commands import wink
 from commands import wiki
+from commands import music

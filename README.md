@@ -3,6 +3,13 @@ Bot for Luna shenanigans
 
 Since no one else can see this I am just gonna type all the features and things that need to be fixed here.
 
+Install package requirements:
+python 3.6
+discord.py
+PyNaCl
+youtube_dl
+ffmpeg/avconv
+
 THINGS THAT NEED FIXING:
 -Need a way for the bot to send a response when a command isn't recognized.
 -Need better way to import folders so we don't need to import each command into the main file
