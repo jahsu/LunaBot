@@ -39,6 +39,21 @@ async def peekaboo():
     await bot.say(commands.peekaboo.peek_iu())
 
 
+@bot.command(pass_context=True)
+async def wiki(ctx, *args):
+    await bot.say(commands.wiki.query_wiki(ctx, args))
+
+
+@bot.command()
+async def twentyfive():
+    await bot.say('https://www.youtube.com/watch?v=d9IxdwEFk1c')
+
+
+@bot.command()
+async def twentythree():
+    await bot.say('https://www.youtube.com/watch?v=42Gtm4-Ax2U')
+
+
 @bot.command()
 async def gaming():
     await bot.say('https://media1.tenor.com/images/c8827d28f2821f0c78406565f334a6d0/tenor.gif?itemid=9266360')
@@ -49,9 +64,20 @@ async def k():
     await bot.say('http://i.imgur.com/yyyg94n.gif')
 
 
+@bot.command()
+async def plumpbois():
+    await bot.say('P L U M P B O I S  https://media.giphy.com/media/O5GKT0UDGyQLu/giphy.gif')
+
+
 @bot.command(pass_context=True)
-async def say(ctx, arg):
-    msg = arg.format(ctx.message)
+async def say(ctx, *args):
+    msg = ' '.join(args).format(ctx.message)
+    await bot.say(msg)
+
+
+@bot.command(pass_context=True)
+async def yut(ctx):
+    msg = '{0.author.mention} yutted!'.format(ctx.message)
     await bot.say(msg)
 
 # Catch non-existing commands
