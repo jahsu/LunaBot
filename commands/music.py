@@ -61,6 +61,11 @@ class Music:
         state = self.get_voice_state(channel.server)
         state.voice = voice
 
+    async def clear_voice_state(self, server):
+        state = self.voice_states.get(server.id)
+        if state is not None:
+            self.voice_states = {}
+
     def __unload(self):
         for state in self.voice_states.values():
             try:

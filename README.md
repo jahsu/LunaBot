@@ -17,6 +17,7 @@ THINGS THAT NEED FIXING:
 -Make the help response better looking lol
 -Auto-deployments so remote users can test their changes (IMPORTANT)
 -Create Command mapper
+-Error logging???
 -Hide the token better or something
 -More IU
 

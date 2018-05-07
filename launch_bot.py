@@ -50,6 +50,28 @@ async def feature():
     await bot.say(commands.feature.show_features())
 
 
+@bot.command(pass_context=True, no_pm=True, brief="Remove bot from current channel")
+async def kickbot(ctx):
+    bot_music = bot.get_cog('Music')
+    for vc in bot.voice_clients:
+        if vc.server == ctx.message.server:
+            await commands.music.Music.clear_voice_state(bot_music, ctx.message.server)
+            return await vc.disconnect()
+
+    return await bot.say("Why you tryin to kick me bruh??")
+
+
+@bot.command(pass_context=True, no_pm=True, brief="Move bot to requester's channel")
+async def move(ctx):
+    bot_music = bot.get_cog('Music')
+    loc = ctx.message.author.voice_channel
+    if loc is None:
+        await bot.say('You aint in a channel bruh.')
+        return False
+    else:
+        await commands.music.Music.summon(bot_music, ctx)
+
+
 @bot.command(no_pm=True, brief=";)")
 async def wink():
     await bot.say(commands.wink.wink_iu())
