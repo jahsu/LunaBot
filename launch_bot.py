@@ -118,6 +118,36 @@ async def play(ctx, arg):
     await commands.music.Music.enque(bot_music, ctx, VoiceEntry(ctx.message, player))
 
 
+@bot.command(pass_context=True, no_pm=True, brief="Adjust volume of music player", description="ex. !volume <value>")
+async def volume(ctx, arg):
+    bot_music = bot.get_cog('Music')
+    await commands.music.Music.set_volume(bot_music, ctx, arg)
+
+
+@bot.command(pass_context=True, no_pm=True, brief="Pause current playing song")
+async def pause(ctx):
+    bot_music = bot.get_cog('Music')
+    await commands.music.Music.pause_player(bot_music, ctx)
+
+
+@bot.command(pass_context=True, no_pm=True, brief="Resume current  song")
+async def resume(ctx):
+    bot_music = bot.get_cog('Music')
+    await commands.music.Music.resume_player(bot_music, ctx)
+
+
+@bot.command(pass_context=True, no_pm=True, brief="Stop playing songs")
+async def stop(ctx):
+    bot_music = bot.get_cog('Music')
+    await commands.music.Music.stop_player(bot_music, ctx)
+
+
+@bot.command(pass_context=True, no_pm=True, brief="Skip your current requested playing song, not others")
+async def skip(ctx):
+    bot_music = bot.get_cog('Music')
+    await commands.music.Music.skip_song(bot_music, ctx)
+
+
 @bot.command(no_pm=True, brief="Watch me game")
 async def gaming():
     await bot.say('https://media1.tenor.com/images/c8827d28f2821f0c78406565f334a6d0/tenor.gif?itemid=9266360')

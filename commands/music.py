@@ -107,8 +107,52 @@ class Music:
             await self.bot.say('cant play ur jams')
             print(e)
         else:
-            player.volume = 0.05
+            player.volume = 0.1
             return player
+
+    async def set_volume(self, ctx, vol: int):
+        state = self.get_voice_state(ctx.message.server)
+        if state.is_playing():
+            player = state.player
+            player.volume = vol / 100
+            await self.bot.say('Set the volume to {:.0%}'.format(player.volume))
+
+    async def pause_player(self, ctx):
+        state = self.get_voice_state(ctx.message.server)
+        if state.is_playing():
+            player = state.player
+            player.pause()
+
+    async def resume_player(self, ctx):
+        state = self.get_voice_state(ctx.message.server)
+        if state.is_playing():
+            player = state.player
+            player.resume()
+
+    async def stop_player(self, ctx):
+        state = self.get_voice_state(ctx.message.server)
+        if state.is_playing():
+            player = state.player
+            player.stop()
+
+        try:
+            state.audio_player.cancel()
+            del self.voice_states[ctx.message.server.id]
+            await state.voice.disconnect()
+        except:
+            pass
+
+    async def skip_song(self, ctx):
+        state = self.get_voice_state(ctx.message.server)
+        if not state.is_playing():
+            await self.bot.say('No tunes up in here bruh.')
+            return
+
+        if ctx.message.author == state.current.requester:
+            await self.bot.say("Moving to better songs....")
+            state.skip()
+        else:
+            await self.bot.say('Wait your turn, bruh.')
 
     async def enque(self, ctx, entry):
         state = self.get_voice_state(ctx.message.server)
