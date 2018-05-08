@@ -107,15 +107,15 @@ class Music:
             await self.bot.say('cant play ur jams')
             print(e)
         else:
-            player.volume = 0.1
+            player.volume = 0.01
             return player
 
-    async def set_volume(self, ctx, vol: int):
+    async def set_volume(self, ctx, vol):
         state = self.get_voice_state(ctx.message.server)
         if state.is_playing():
             player = state.player
-            player.volume = vol / 100
-            await self.bot.say('Set the volume to {:.0%}'.format(player.volume))
+            player.volume = float(vol) / 100
+            await self.bot.say('Set the volume to {:.1%}'.format(player.volume))
 
     async def pause_player(self, ctx):
         state = self.get_voice_state(ctx.message.server)
