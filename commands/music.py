@@ -107,7 +107,7 @@ class Music:
             await self.bot.say('cant play ur jams')
             print(e)
         else:
-            player.volume = 0.01
+            player.volume = 0.25
             return player
 
     async def set_volume(self, ctx, vol):
