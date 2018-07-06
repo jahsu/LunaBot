@@ -82,6 +82,11 @@ async def peekaboo():
     await bot.say(commands.peekaboo.peek_iu())
 
 
+@bot.command(no_pm=True, brief="Yo")
+async def gangsta():
+    await bot.say(commands.gangsta.gangsta_iu())
+
+
 @bot.command(pass_context=True, brief="I'll search the wikis", description="ex. !wiki <search_query>")
 async def wiki(ctx, *args):
     await bot.say(commands.wiki.query_wiki(ctx, args))
@@ -153,6 +158,11 @@ async def gaming():
     await bot.say('https://media1.tenor.com/images/c8827d28f2821f0c78406565f334a6d0/tenor.gif?itemid=9266360')
 
 
+@bot.command(no_pm=True, brief="Applause")
+async def clap():
+    await bot.say('https://gfycat.com/SpotlessMedicalAtlanticspadefish')
+
+
 @bot.command(no_pm=True, brief="K")
 async def k():
     await bot.say('http://i.imgur.com/yyyg94n.gif')
@@ -172,6 +182,12 @@ async def say(ctx, *args):
 @bot.command(pass_context=True, no_pm=True, brief="I'm gonna yut!!!")
 async def yut(ctx):
     msg = '{0.author.mention} yutted!'.format(ctx.message)
+    await bot.say(msg)
+
+
+@bot.command(pass_context=True, no_pm=True, brief="Get a blessing")
+async def bless(ctx):
+    msg = '{0.author.mention} #blessed https://gph.is/2Nn1t1f'.format(ctx.message)
     await bot.say(msg)
 
 # Catch non-existing commands
