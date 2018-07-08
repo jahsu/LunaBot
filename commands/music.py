@@ -44,6 +44,9 @@ class Music:
     """Voice related commands.
     Works in multiple servers at once.
     """
+
+    PLAYER_VOLUME = 0.25
+
     def __init__(self, bot):
         self.bot = bot
         self.voice_states = {}
@@ -107,14 +110,15 @@ class Music:
             await self.bot.say('cant play ur jams')
             print(e)
         else:
-            player.volume = 0.25
+            player.volume = self.PLAYER_VOLUME
             return player
 
     async def set_volume(self, ctx, vol):
         state = self.get_voice_state(ctx.message.server)
         if state.is_playing():
             player = state.player
-            player.volume = float(vol) / 100
+            self.PLAYER_VOLUME = float(vol) / 100
+            player.volume = self.PLAYER_VOLUME
             await self.bot.say('Set the volume to {:.1%}'.format(player.volume))
 
     async def pause_player(self, ctx):
