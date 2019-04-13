@@ -9,6 +9,7 @@ discord.py
 PyNaCl
 youtube_dl
 ffmpeg/avconv
+wikipedia-api
 
 THINGS THAT NEED FIXING:
 -Need a way for the bot to send a response when a command isn't recognized.
