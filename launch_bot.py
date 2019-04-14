@@ -6,6 +6,7 @@ import commands
 bot = cmd.Bot(command_prefix='!')
 bot.add_cog(commands.music.VoiceState(bot))
 bot.add_cog(commands.music.Music(bot))
+# bot.add_cog(commands.wiki.WikiPage(bot))
 
 # we do not want the bot to reply to itself
 #     if message.author == client.user:
