@@ -16,7 +16,7 @@ def query_wiki(ctx, query):
     wiki_page = wiki_client.page(query)
     if wiki_page.exists():
         if "disambiguation" in wiki_page.fullurl:
-            return print_disambiguation_links(wiki_page)
+            return print_disambiguation_links(wiki_page).format(ctx.message)
         else:
             return wiki_page.fullurl.format(ctx.message)
     else:
