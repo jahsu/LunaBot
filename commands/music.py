@@ -11,6 +11,7 @@ class VoiceState:
         self.songs = asyncio.Queue()
         self.skip_votes = set() # a set of user_ids that voted
         self.audio_player = self.bot.loop.create_task(self.audio_player_task())
+        self.repeat = False
 
     def is_playing(self):
         if self.voice is None or self.current is None:
@@ -18,6 +19,9 @@ class VoiceState:
 
         player = self.current.player
         return not player.is_done()
+
+    def is_repeating(self):
+        return self.repeat
 
     @property
     def player(self):
@@ -29,7 +33,10 @@ class VoiceState:
             self.player.stop()
 
     def toggle_next(self):
-        self.bot.loop.call_soon_threadsafe(self.play_next_song.set)
+        # if self.is_repeating():
+        #     self.bot.loop.call_soon_threadsafe(self.audio_player_task())
+        # else:
+            self.bot.loop.call_soon_threadsafe(self.play_next_song.set)
 
     async def audio_player_task(self):
         while True:
@@ -161,3 +168,19 @@ class Music:
     async def enque(self, ctx, entry):
         state = self.get_voice_state(ctx.message.server)
         await state.songs.put(entry)
+
+    async def repeat_on(self, ctx):
+        state = self.get_voice_state(ctx.message.server)
+        if not state.is_repeating():
+            state.repeat = True
+            await self.bot.say("This tune so fine I'ma repeat it!")
+        else:
+            await self.bot.say("Geez louise stop smashing the repeat button!")
+
+    async def repeat_off(self, ctx):
+        state = self.get_voice_state(ctx.message.server)
+        if state.is_repeating():
+            state.repeat = False
+            await self.bot.say("Not repeatin' yo jams no mo'!")
+        else:
+            await self.bot.say("Boy I ain't repeating your ish!")

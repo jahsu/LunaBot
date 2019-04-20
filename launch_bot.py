@@ -154,6 +154,12 @@ async def skip(ctx):
     await commands.music.Music.skip_song(bot_music, ctx)
 
 
+@bot.command(pass_context=True, no_pm=True, brief="Skip your current requested playing song, not others")
+async def repeatone(ctx):
+    bot_music = bot.get_cog('Music')
+    await commands.music.Music.repeat_one_song(bot_music, ctx)
+
+
 @bot.command(no_pm=True, brief="Watch me game")
 async def gaming():
     await bot.say('https://media1.tenor.com/images/c8827d28f2821f0c78406565f334a6d0/tenor.gif?itemid=9266360')
