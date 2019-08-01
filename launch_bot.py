@@ -78,6 +78,11 @@ async def wink():
     await bot.say(commands.wink.wink_iu())
 
 
+@bot.command(no_pm=True, brief=";P")
+async def lips():
+    await bot.say(commands.lips.lips_iu())
+
+
 @bot.command(no_pm=True, brief="Try it and find out...")
 async def peekaboo():
     await bot.say(commands.peekaboo.peek_iu())
@@ -154,10 +159,16 @@ async def skip(ctx):
     await commands.music.Music.skip_song(bot_music, ctx)
 
 
-@bot.command(pass_context=True, no_pm=True, brief="Skip your current requested playing song, not others")
-async def repeatone(ctx):
+@bot.command(pass_context=True, no_pm=True, brief="Turn on repeat current playlist")
+async def repeaton(ctx):
     bot_music = bot.get_cog('Music')
-    await commands.music.Music.repeat_one_song(bot_music, ctx)
+    await commands.music.Music.repeat_on(bot_music, ctx)
+
+
+@bot.command(pass_context=True, no_pm=True, brief="Turn off repeat current playlist")
+async def repeatoff(ctx):
+    bot_music = bot.get_cog('Music')
+    await commands.music.Music.repeat_off(bot_music, ctx)
 
 
 @bot.command(no_pm=True, brief="Watch me game")
