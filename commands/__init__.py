@@ -5,3 +5,4 @@ from commands import wink
 from commands import wiki
 from commands import music
 from commands import gangsta
+from commands import lips
