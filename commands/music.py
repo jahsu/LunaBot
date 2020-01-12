@@ -33,14 +33,16 @@ class VoiceState:
             self.player.stop()
 
     def toggle_next(self):
-        # if self.is_repeating():
-        #     self.bot.loop.call_soon_threadsafe(self.audio_player_task())
-        # else:
             self.bot.loop.call_soon_threadsafe(self.play_next_song.set)
 
     async def audio_player_task(self):
         while True:
             self.play_next_song.clear()
+            while self.is_repeating() and self.current is not None:
+                self.current.player.start()
+            #if self.is_repeating():
+             #   if self.current is not None:
+              #      self.songs.put(self.current)
             self.current = await self.songs.get()
             await self.bot.send_message(self.current.channel, 'Now playing ' + str(self.current))
             self.current.player.start()

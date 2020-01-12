@@ -98,6 +98,11 @@ async def wiki(ctx, *args):
     await bot.say(commands.wiki.query_wiki(ctx, args))
 
 
+@bot.command(pass_context=True, brief="Let me spit", description="ex. !slang <search_query>")
+async def slang(ctx, *args):
+    await bot.say(commands.slang.spit_slang(ctx, args))
+
+
 @bot.command(pass_context=True, no_pm=True, brief="I'm twenty five!")
 async def twentyfive(ctx):
     url = 'https://www.youtube.com/watch?v=d9IxdwEFk1c'
@@ -117,6 +122,14 @@ async def twentythree(ctx):
 @bot.command(pass_context=True, no_pm=True, name="420", brief="420 blaze it")
 async def fourtwenty(ctx):
     url = 'https://www.youtube.com/watch?v=aVRzocGJzw8'
+    bot_music = bot.get_cog('Music')
+    player = await commands.music.Music.play_music(bot_music, ctx, url)
+    await commands.music.Music.enque(bot_music, ctx, VoiceEntry(ctx.message, player))
+
+
+@bot.command(pass_context=True, no_pm=True, name="lab", brief="Back to the lab again")
+async def lab(ctx):
+    url = 'https://www.youtube.com/watch?v=aCV0pHjtxes'
     bot_music = bot.get_cog('Music')
     player = await commands.music.Music.play_music(bot_music, ctx, url)
     await commands.music.Music.enque(bot_music, ctx, VoiceEntry(ctx.message, player))
